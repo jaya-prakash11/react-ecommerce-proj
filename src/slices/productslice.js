@@ -60,9 +60,7 @@ export const productSlice = createSlice({
     });
     builder.addCase(fetchAllCategory.fulfilled, (state, action) => {
       state.productAndCategory.isLoading = false;
-      state.productAndCategory.categoryList = action.payload.map((res) => {
-        return { name: res.name };
-      });
+      state.productAndCategory.categoryList = action.payload;
     });
     builder.addCase(fetchAllCategory.rejected, (state, action) => {
       state.productAndCategory.isLoading = false;

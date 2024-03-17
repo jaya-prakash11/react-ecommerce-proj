@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Layout from "./components/shared/layout/layout";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import Product from "./pages/product/product";
+
 function App() {
   const router = createBrowserRouter([
     {

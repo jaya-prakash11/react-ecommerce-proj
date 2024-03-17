@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllProducts, fetchAllCategory } from "../../slices/productslice";
+import { fetchAllProducts, fetchAllCategory } from "../../Slices/productslice";
+import CarouselComponent from "../../components/Carousel";
+import BestsellingComponent from "../../components/Bestsellingcomponent";
+import CategoryComponent from "../../components/CategoryComponent";
+import ProductCarousel from "../../components/Productcarousel";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
+  let navigate = useNavigate();
   let dispatch = useDispatch(fetchAllProducts());
   const products = useSelector(
     (state) => state?.products?.productAndCategory?.allProducts
@@ -15,15 +21,25 @@ export default function Dashboard() {
     dispatch(fetchAllProducts());
     dispatch(fetchAllCategory());
   }, []);
-  console.log("asdds", categoryList);
   return (
-    <div className="flex h-[3500px] w-full">
-      <div className="flex w-full  bg-slate-200 h-fit justify-center ">
-        <div className="flex l gap-5 ">
+    <div className="flex-col h-fit  w-full  bg-green-500">
+      <div className="flex w-full h-fit bg-red-500 ">
+        <div className=" flex w-full gap-5 bg-slate-200 justify-center">
           {categoryList.map((res) => (
-            <p>{res.name}</p>
+            <p onClick={() => navigate("/product")} className="cursor-pointer">
+              {res.name}
+            </p>
           ))}
         </div>
+      </div>
+      <div className="flex-col space-y-16">
+        <CarouselComponent data={categoryList} />
+        <BestsellingComponent title={"Flash Sales"} />
+        <BestsellingComponent />
+        <CategoryComponent />
+        <CategoryComponent />
+        <ProductCarousel title={"Electronics"} />
+        <ProductCarousel title={"Bags"} />
       </div>
     </div>
   );
